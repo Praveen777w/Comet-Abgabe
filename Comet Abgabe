@@ -1,0 +1,206 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+
+\title{Abgabe 1 für Computergestützte Methoden}
+\author{Gruppe: 22; Praveen Selvenesan 4335661, Jalil Selo 4273577, Ali Omar 4342151}
+\date{02.12.2024}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\tableofcontents
+
+\newpage
+\section{Der zentrale Grenzwertsatz}
+ Der zentrale Grenzwertsatz (ZGS) ist ein fundamentales Resultat der Wahrscheinlichkeitstheorie, das die Verteilung von Summen unabhängiger, identisch verteilter (\textit{i.i.d.}) Zufallsvariablen (ZV) beschreibt. Er besagt, dass unter bestimmten Voraussetzungen die Summe einer großen Anzahl solcher ZV annähernd normalverteilt ist, unabhängig von der Verteilung der einzelnen ZV. Dies ist besonders nützlich, da die Normalverteilung gut untersucht und mathematisch handhabbar ist.
+
+ 
+\subsection{Aussage}
+
+Sei $X_1, X_2, \dots, X_n$ eine Folge von i.i.d. Zufallsvariablen (ZV) mit dem Erwartungswert $\mu = \mathbb{E}(X_i)$ und der Varianz $\sigma^2 = \text{Var}(X_i)$, wobei $0 < \sigma^2 < \infty$ gelte. Dann konvergiert die standardisierte Summe $Z_n$ dieser ZV für $n \to \infty$ in Verteilung gegen eine Standardnormalverteilung:\footnote{Der zentrale Grenzwertsatz hat verschiedene Verallgemeinerungen. Eine davon ist der \textbf{Lindeberg-Feller-Zentrale-Grenzwertsatz} [1, Seite 328], der schwächere Bedingungen an die Unabhängigkeit und die identische Verteilung der ZV stellt.}
+\begin{equation}
+    \label{ZGS:Grenzwert_Funktion}
+Z_n = \frac{\sum_{i=1}^n X_i - n\mu}{\sigma\sqrt{n}} \xrightarrow{d} N(0, 1).
+\end{equation}
+
+Das bedeutet, dass für große $n$ die Summe der ZV näherungsweise normalverteilt ist mit Erwartungswert $n\mu$ und Varianz $n\sigma^2$:
+
+\begin{equation}
+    \label{E:Erwartungswert_Funktion}
+\sum_{i=1}^n X_i \sim N(n\mu, n\sigma^2)
+\end{equation}
+
+\subsection{Erklärung der Standardisierung}
+
+Um die Summe der Zufallsvariablen (ZV) in eine Standardnormalverteilung zu transformieren, subtrahiert man den Erwartungswert $n\mu$ und teilt durch die Standardabweichung $\sigma\sqrt{n}$. Dies führt zu der obigen Formel \eqref{ZGS:Grenzwert_Funktion}:
+Die Darstellung \eqref{E:Erwartungswert_Funktion} ist für $n \to \infty$ nicht wohldefiniert.
+
+\subsection{Anwendungen}
+
+Der zentrale Grenzwertsatz (ZGS) wird in vielen Bereichen der Statistik und der Wahrscheinlichkeitstheorie angewendet. Typische Beispiele sind:
+\begin{itemize}
+    \item \textit{Schätzung von Mittelwerten und deren Konfidenzintervalle:} Der ZGS ermöglicht es, Stichprobenmittelwerte näherungsweise normalzuverteilen, was die Berechnung von Konfidenzintervallen vereinfacht.
+    \item \textit{Hypothesentests:} Viele statistische Tests basieren auf der Annahme einer Normalverteilung, die durch den ZGS begründet wird, wenn ausreichend viele Stichproben vorhanden sind.
+\end{itemize}
+
+\section{Datenaufbereitung}
+\subsection{Erklärung und Gliederung des Datensatzes}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{Datensatz Fahrradverleih.png}
+    \caption{Datensatz Fahrradverleih}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Wir haben einen Datensatz zu einem Fahrradverleih in Excel erhalten, der verschiedene relevante Variablen umfasst. Die Tabelle enthielt Spalten wie \textbf{``group''}, \textbf{``station''}, \textbf{``date''}, \textbf{``day\_of\_year''}, \textbf{``day\_of\_week''}, \textbf{``month\_of\_year''}, \textbf{``precipitation''}, \textbf{``windspeed''}, \textbf{``min\_temperature''}, \textbf{``average\_temperature''}, \textbf{``max\_temperature''} und \textbf{``count''}, welche die Anzahl der ausgeliehenen Fahr-räder angeben. Bei der ersten Auswertung des Datensatzes wurde ein Zusammenhang zwischen der Wetterlage und der Anzahl der ausgeliehenen Fahrräder deutlich. Insbesondere scheinen Variablen wie \textbf{Niederschlag}, \textbf{Windgeschwindigkeit} und \textbf{Temperatur} einen signifikanten Einfluss auf die Nachfrage nach den Fahrrädern zu haben. Diese Erkenntnisse legen den Grundstein für eine weiterführende Analyse, um genauere Muster zu erkennen und Handlungsempfehlungen für den Fahrradverleih abzuleiten. Unser Hauptaugenmerk liegt dabei auf der Station Allen St. und Stanton St.
+
+
+
+\subsection{Übertragung in eine Tabellenkalkulation}
+
+Aufgrund der Tatsache, dass der vollständige Datensatz eine erhebliche Herausforderung in der Handhabung darstellt und keine klare Struktur aufweist, haben wir uns zunächst dazu entschieden, die Daten in ihrer Gesamtheit in Excel zu importieren. Um den Fokus gezielt auf die für unsere Analyse relevanten Daten zu legen, haben wir die Filteroption von Excel verwendet. Dabei wurden sämtliche Gruppen ausgeblendet, die für unsere Arbeit nicht von Bedeutung sind, sodass ausschließlich die Daten der Gruppe 22 sichtbar blieben. Durch diesen Schritt konnten wir den für uns relevanten Teil des Datensatzes in einer übersichtlichen und geordneten Tabellenstruktur darstellen. Dies erleichtert die weitere Bearbeitung und Analyse erheblich und ermöglicht es uns, präzisere und effizientere Arbeitsschritte durchzuführen.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{IMG_7722 (1).jpg}
+    \caption{Filterprozess der Daten}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsection{Ermittlung der höchsten mittleren Temperatur}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Befehl Average Temperature sortieren.png}
+    \caption{Befehl Average Temperature sortieren}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Um den umfangreichen Datensatz effektiv zu analysieren, sind wir zunächst systematisch vorgegangen, um den für uns relevanten Teil zu extrahieren. Zuerst haben wir den gesamten Datensatz in Excel markiert und die Filteroption aktiviert, um gezielt bestimmte Daten ein- oder auszublenden. Anschließend wurden sämtliche Gruppen zunächst deaktiviert, sodass nur die Gruppe 22, die für unsere Analyse von Bedeutung ist, aktiviert blieb. Dadurch wurde der Rest des Datensatzes ausgeblendet, und wir erhielten eine klar strukturierte und fokussierte Ansicht der für uns relevanten Daten. Daraufhin haben wir die Spalte "average temperature" sortiert, um die Werte aufsteigend bzw. absteigend anzuordnen. Dabei konnten wir feststellen, dass der höchste Wert in dieser Spalte bei 83 Fahrenheiten liegt. Diese Schritte haben uns ermöglicht, die relevanten Daten übersichtlich darzustellen und die Basis für weitere Analysen zu schaffen. Zudem gibt es eine weitere Methode, um den höchsten Wert der Spalte zu ermitteln. Dazu hätte man ein beliebiges freies Feld in der Tabelle auswählen und die Formel =MAX( eingeben können. Anschließend hätte man durch einfaches Markieren die entsprechende Spalte ausgewählt, die Klammer geschlossen und die Eingabetaste gedrückt. Excel hätte daraufhin den höchsten Wert der Spalte automatisch berechnet und in dem ausgewählten Feld angezeigt.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{Höchste mittlere Temperatur durch Befehl.jpg}
+    \caption{Höchste mittlere Temperatur durch Befehl}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Die Umrechnung von Fahrenheit in Grad Celsius ist gegeben durch:
+\[
+C = \frac{5}{9} \cdot (F - 32)
+\]
+In unserem Fall beträgt der Wert der Fahrenheit-Temperatur 83. Um diesen Wert in die entsprechende Temperatur in Grad Celsius umzurechnen verwenden wir die Umrechnungsformel. Nach Einsetzen des Wertes 83 für die Fahrenheit-Temperatur ergibt sich:
+\[
+C = \frac{5}{9} \cdot (83 - 32) = \frac{5}{9} \cdot 51 \approx 28{,}33
+\]
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{Average Temperature sortiert.png}
+    \caption{Average Temperature sortiert}
+    \label{fig:enter-label}
+\end{figure}
+\newpage
+\section{Datenhaltung}
+\subsection{Umsetzung des Schemas in SQL}
+\textit{1. Normalform:} Die 1. Normalform sorgt dafür, dass alle Attribute einer Tabelle atomare Werte enthalten, dementsprechend hat also jede Zelle genau einen Wert. Dies führt dazu, dass die Tabelle eine klare und strukturierte Organisation aufweist.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{1.Normalform (1).png}
+    \caption{1. Normalform}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent \textit{2. Normalform:} Die 2. Normalform ist erreicht, wenn die Tabelle in der 1. Normalform ist und alle Nicht-Schlüsselattribute vollständig vom gesamten Primär-schlüssel abhängen, sodass dementsprechend keine partiellen Abhängigkeiten bestehen.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{2.Normalform.png}
+    \caption{2. Normalform}
+    \label{fig:enter-label}
+\end{figure}
+\newpage
+\subsection{Import der zugeordneten Daten als CSV}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Schema SQL 1.png}
+    \caption{Schema SQL 1}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Schema SQL 2.png}
+    \caption{Schema SQL 2}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Schema SQL 3.png}
+    \caption{Schema SQL 3}
+    \label{fig:enter-label}
+\end{figure}
+
+\noindent Im Rahmen unseres Arbeitsprozesses war es nicht erforderlich, ein eigenes DDL-Skript zur Erstellung der Datenbank zu verfassen. Der Grund hierfür liegt in der Konfiguration des verwendeten Online-SQL-Editors, der automatisch Tabellen generiert, sobald eine Abfrage auf eine nicht vorhandene Tabelle verweist. Dadurch entfiel die Notwendigkeit, eine manuelle Anpassung der Tabellenstruktur vorzunehmen. Dies ermöglichte es uns, direkt mit der Formulierung und Durchführung der SQL-Abfragen zu beginnen, ohne vorherige Änderungen an der Tabellenkalkulation vornehmen zu müssen.
+
+\noindent Hier sind die allgemeinen Befehle des DDL-Bereichs zur Übersicht aufgeführt:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|p{10cm}|}
+
+\hline
+\textbf{Befehl}    & \textbf{Zweck} \\ \hline
+\texttt{CREATE}    & Erstellt neue Objekte wie Tabellen oder Datenbanken. \\ \hline
+\texttt{ALTER}     & Ändert bestehende Objekte, z. B. das Entfernen oder Hinzufügen von Spalten. \\ \hline
+\texttt{DROP}      & Löscht Objekte dauerhaft (z. B. Tabellen ). \\ \hline
+\texttt{TRUNCATE}  & Entfernt alle Daten aus einer Tabelle, ohne die Struktur zu löschen. \\ \hline
+\texttt{RENAME}    & Ändert den Namen eines Objekts (z. B. einer Tabelle). \\ \hline
+\end{tabular}
+\caption{Zusammenfassung der DDL-Befehle}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Definition der Tabelle.png}
+    \caption{Definition der Tabelle}
+    \label{fig:enter-label}
+\end{figure}
+\newpage
+\subsection{SQL-Abfrage zur Ermittlung der Höchsten mittleren Temperatur}
+In der vorliegenden SQL Abfrage wird eine Analyse auf der Tabelle \textit{bike sharing data with NAs} durchgeführt, um die höchste mittlere Temperatur zu ermitteln. Als erstes haben wir mit dem Befehl \textit{MAX(average temperature)} den maximalen Wert dieser Spalte berechnet. Das Ergebnis dieses Befehls wird als \textit{max temperature} gekennzeichnet. Die Daten werden dabei aus der Tabelle \textit{bike sharing data with NAs} entnommen, wobei mit der \textit{WHERE} Funktion sichergestellt wird, dass nur relevante Werte berücksichtigt werden. Dementsprechend werden unzulässige Werte wie \textit{NULL} und \textit{'NA'} ignoriert. Das Ergebnis der Abfrage ist unserem Fall 83 Fahrenheiten, was umgerechnet rund 28.33 Grad Celsius entspricht.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{Screenshot (212).png}
+    \caption{SQL Abfrage }
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{SQL Abfrage Ergebnis.jpeg}
+    \caption{SQL Abfrage Ergebnis}
+    \label{fig:enter-label}
+\end{figure}
+
+\clearpage
+
+\section{Quellenverzeichnis}
+\subsection{Literaturverzeichnis}
+[1] Achim Klenke. Wahrscheinlichkeitstheorie. Springer, 3 edition, 2013 
+\subsection{Abbildungsverzeichnis}
+\listoffigures
+\subsection{Tabellenverzeichnis}
+\listoftables
+\end{document}
+
+
+
